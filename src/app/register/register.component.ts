@@ -13,7 +13,6 @@ export class RegisterComponent {
     isLoading : boolean = false ;
     errorMessage! : string ;
     constructor(private _AuthService :AuthService , private _Router:Router){}
-
     registerForm : FormGroup = new FormGroup({
       name : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(8)]),
       email : new FormControl(null, [Validators.required, Validators.email]),
