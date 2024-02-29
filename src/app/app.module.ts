@@ -13,8 +13,22 @@ import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { SearchPipe } from './search.pipe';
+
+import {
+  NgxAwesomePopupModule,
+  DialogConfigModule,
+  ConfirmBoxConfigModule,
+  ToastNotificationConfigModule
+} from '@costlydeveloper/ngx-awesome-popup';
+
 
 @NgModule({
   declarations: [
@@ -28,11 +42,17 @@ import { HttpClientModule } from "@angular/common/http";
     LoginComponent,
     NotfoundComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ProductDetailsComponent,
+    SearchPipe
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule , ReactiveFormsModule , HttpClientModule
+    BrowserModule, FormsModule,
+    NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
+    DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
+    ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
+    ToastNotificationConfigModule.forRoot(), // Needed for instantiating toast notifications.
+    AppRoutingModule , ReactiveFormsModule , HttpClientModule , RouterModule , BrowserAnimationsModule,CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

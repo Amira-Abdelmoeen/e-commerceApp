@@ -8,18 +8,21 @@ import { CartComponent } from './cart/cart.component';
 import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { authGuard } from './auth.guard';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 
 
 const routes: Routes = [
-  {path : '' , redirectTo : "register" , pathMatch : "full"},
+  {path : '' , redirectTo : "home" , pathMatch : "full"},
   {path : "register" , component : RegisterComponent},
   {path : "login" , component : LoginComponent},
-  {path : "home" , component : HomeComponent},
-  {path : "brands" , component : BrandsComponent},
-  {path : "cart" , component : CartComponent},
-  {path : "products" , component : ProductsComponent},
-  {path : "categories" , component : CategoriesComponent},
+  {path : "home" , canActivate: [authGuard], component : HomeComponent},
+  {path : "brands" , canActivate: [authGuard], component : BrandsComponent},
+  {path : "cart" , canActivate: [authGuard], component : CartComponent},
+  {path : "productDetails/:id" , component : ProductDetailsComponent },
+  {path : "products" , canActivate: [authGuard], component : ProductsComponent},
+  {path : "categories" , canActivate: [authGuard], component : CategoriesComponent},
   {path : "**" , component : NotfoundComponent},
 
   
