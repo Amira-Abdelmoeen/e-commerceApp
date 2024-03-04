@@ -41,7 +41,9 @@
 
             <div class="product p-2 h-100 position-relative">
 
-                <i (click)="addFav(product._id)" class="fa-regular fa-heart heart "> </i>
+                <i  *ngIf="!wishlistData.includes(product._id)" (click)="addFav(product._id)" class="fa-regular fa-heart heart "> </i>
+                <i  *ngIf="wishlistData.includes(product._id)"  (click)="removeFav(product._id)" class="fa-solid fa-heart heart "> </i>
+
 
                 <div [routerLink]="['/productDetails' , product._id ]">
                     <img [src]="product.imageCover"  class="w-100" [alt]="product.title">

@@ -28,7 +28,7 @@ export class WishlistService {
   }
 
   removeWishListApi(pId:string):Observable<any>{
-    return this._HttpClient.get(`${this.baseUrl}/api/v1/wishlist/${pId}`,{headers : this.userHeader})
+    return this._HttpClient.delete(`${this.baseUrl}/api/v1/wishlist/${pId}`,{headers : this.userHeader})
   }
 
 }
