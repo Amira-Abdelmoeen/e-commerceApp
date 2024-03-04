@@ -14,6 +14,7 @@ export class CartComponent  implements OnInit {
 
   cartItems: any = []
   totalPrice:string=""
+  cartId:string =""
 
   constructor( private toastEvokeService: ToastEvokeService,private _CartService:CartService){}
 
@@ -27,6 +28,7 @@ export class CartComponent  implements OnInit {
       {
         this.cartItems  = res.data.products
         this.totalPrice = res.data.totalCartPrice
+        this.cartId = res.data._id
 
       },
       error: (err) => {console.log(err)}
