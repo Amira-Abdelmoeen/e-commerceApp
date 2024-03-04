@@ -27,11 +27,15 @@ a:hover {
     text-decoration: none;
 }
 
+.product{
+    overflow:hidden
+}
 .product:hover,
-.category:hover
+.category:hover,
+.brand:hover
 {
     box-shadow: var(--shadow);
-    border: solid 1px var(--main-color);
+    border: solid 2px var(--main-color);
 }
 
 .product .btn {
@@ -60,4 +64,16 @@ a:hover {
 
 .bg-main-light {
     background-color: var(--light-color) !important;
+}
+
+.heart{
+    font-size: 30px;
+    position: absolute;
+    top: 7px;
+    right: -40px;
+    z-index: 99;
+    transition: right 0.7s;
+}
+.product:hover .heart{
+    right: 7px;
 }

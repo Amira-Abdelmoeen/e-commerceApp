@@ -11,6 +11,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { authGuard } from './auth.guard';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { PayComponent } from './pay/pay.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path : "productDetails/:id" , component : ProductDetailsComponent },
   {path : "products" , canActivate: [authGuard], component : ProductsComponent},
   {path : "pay/:id" , canActivate: [authGuard], component : PayComponent},
+  {path : "wishlist" , canActivate: [authGuard], component : WishlistComponent},
   {path : "categories" , canActivate: [authGuard], component : CategoriesComponent},
   {path : "**" , component : NotfoundComponent},
 

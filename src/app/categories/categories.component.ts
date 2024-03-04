@@ -11,7 +11,8 @@ import { CategoriesService } from '../categories.service';
 export class CategoriesComponent implements OnInit {
 
   Categories: any[] = []
-
+  subCatgories: any[] = []
+   
   constructor(private _CategoriesService: CategoriesService) { }
   ngOnInit(): void {
 
@@ -20,13 +21,25 @@ export class CategoriesComponent implements OnInit {
     //get all categories
     this._CategoriesService.getCategoriesApi().subscribe({
       next: (res) => {
-        this.Categories = res.data
+        this.Categories = res.data;
       },
       error: (err) => { console.log(err) }
     })
 
 
-  }
+    
+   
 
+  }
+  //get spesfic subcategories
+  getSubCategories(pId:string)
+  {
+   this._CategoriesService.getSubCategoriesApi(pId).subscribe({
+    next: (res) =>{ console.log(pId); },
+    error: (err) => { console.log(err)}
+   })
+  
+
+  }
 
 }

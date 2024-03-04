@@ -5,6 +5,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CartService } from '../cart.service';
 // Import service from the library
 import { ToastEvokeService } from '@costlydeveloper/ngx-awesome-popup';
+import { WishlistService } from '../wishlist.service';
 
 
 @Component({
@@ -59,7 +60,10 @@ export class HomeComponent implements OnInit {
     nav: true
   }
 
-  constructor(private _ProductsService:ProductsService, private _CartService:CartService, private toastEvokeService: ToastEvokeService){}
+  constructor(private _ProductsService:ProductsService,
+     private _CartService:CartService,
+      private toastEvokeService: ToastEvokeService,
+      private _WishlistService:WishlistService){}
 
   products:Product[]=[]
   Categories:any[]=[]
@@ -87,7 +91,6 @@ export class HomeComponent implements OnInit {
 
   }
 
-
   addCartBtn(pId:string)
   {
    this._CartService.addToCartApi(pId).subscribe({
@@ -101,6 +104,14 @@ export class HomeComponent implements OnInit {
 
   }
 
+  addFav(pId:string):void{
+   this._WishlistService.addToWhishListApi(pId).subscribe({
+    next: (res) => {
+      this.toastEvokeService.success('Success', res.message).subscribe();
   
+       },
+    error: (err) => {console.log(err) }
+   })
+  }
 
 }

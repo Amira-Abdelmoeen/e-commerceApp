@@ -29,6 +29,7 @@ import {
   ToastNotificationConfigModule
 } from '@costlydeveloper/ngx-awesome-popup';
 import { PayComponent } from './pay/pay.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { PayComponent } from './pay/pay.component';
     FooterComponent,
     ProductDetailsComponent,
     SearchPipe,
-    PayComponent
+    PayComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule, FormsModule,
