@@ -81,7 +81,6 @@ export class HomeComponent implements OnInit {
       this._ProductsService.getCategoriesApi().subscribe({
         next:(res) =>{
           this.Categories = res.data
-          console.log(this.Categories);
           
         }
   })
@@ -93,9 +92,9 @@ export class HomeComponent implements OnInit {
   {
    this._CartService.addToCartApi(pId).subscribe({
     next: (res) =>{
-    
-        // Type SUCCESS
       this.toastEvokeService.success('Success', res.message).subscribe();
+      this._CartService.cartItemsNum.next(res.numOfCartItems) 
+      
     }
    })
   

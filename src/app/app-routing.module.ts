@@ -10,6 +10,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { authGuard } from './auth.guard';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { PayComponent } from './pay/pay.component';
 
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path : "cart" , canActivate: [authGuard], component : CartComponent},
   {path : "productDetails/:id" , component : ProductDetailsComponent },
   {path : "products" , canActivate: [authGuard], component : ProductsComponent},
+  {path : "pay" , canActivate: [authGuard], component : PayComponent},
   {path : "categories" , canActivate: [authGuard], component : CategoriesComponent},
   {path : "**" , component : NotfoundComponent},
 

@@ -28,6 +28,7 @@ import {
   ConfirmBoxConfigModule,
   ToastNotificationConfigModule
 } from '@costlydeveloper/ngx-awesome-popup';
+import { PayComponent } from './pay/pay.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import {
     NavbarComponent,
     FooterComponent,
     ProductDetailsComponent,
-    SearchPipe
+    SearchPipe,
+    PayComponent
   ],
   imports: [
     BrowserModule, FormsModule,

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../cart.service';
+import { Product } from '../product'; 
+import { ToastEvokeService } from '@costlydeveloper/ngx-awesome-popup';
+
 
 @Component({
   selector: 'app-cart',
@@ -6,10 +10,67 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent  implements OnInit {
+ 
+
+  cartItems: any = []
+  totalPrice:string=""
+
+  constructor( private toastEvokeService: ToastEvokeService,private _CartService:CartService){}
+
+  //start
   ngOnInit(): void {
     
     localStorage.setItem("currentPage" , "/cart")
 
+    this._CartService.getAllCartsCartItemsApi().subscribe({
+      next: (res) => 
+      {
+        this.cartItems  = res.data.products
+        this.totalPrice = res.data.totalCartPrice
+
+      },
+      error: (err) => {console.log(err)}
+    })
+
   }
 
+  //delet
+  removeItemBtn(pId:string)
+  {
+   this._CartService.removeItemsApi(pId).subscribe({
+    next: (res) => 
+    {
+      this.toastEvokeService.success('Success',"Item Deleted Successfully").subscribe();
+      this._CartService.cartItemsNum.next(res.numOfCartItems)
+      this.cartItems = res.data.products
+      
+    }
+   })
+
+  }
+
+  // update + , -
+  updateItemsQuBtn(whichBtn:string , pCount:string , pId:string)
+  {
+    if (whichBtn == "plus") 
+    {
+      pCount =( Number(pCount) + 1).toString()
+    }else
+    {
+      pCount =( Number(pCount) - 1).toString()
+      if (Number(pCount) == 0) 
+      {
+        this.removeItemBtn(pId)
+      }
+    }
+    this._CartService.updateCartItemQuApi(pId , pCount).subscribe(
+      {
+      next: (res) =>
+       {
+        this.cartItems = res.data.products
+      },
+      error: (err) => {console.log(err)
+      }
+    })
+  }
 }

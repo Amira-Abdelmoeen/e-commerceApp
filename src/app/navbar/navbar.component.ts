@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -8,11 +10,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
+
+  cartItemNumNav : string = ""
  isLogin: boolean = false;
 
- constructor(private _AuthService:AuthService , private _Router : Router){}
+ constructor(private _AuthService:AuthService , private _Router : Router,private _CartService:CartService){}
 
  ngOnInit(): void {
+
+      this._CartService.cartItemsNum.subscribe( ()=>{
+      this.cartItemNumNav =  this._CartService.cartItemsNum.getValue()
+      })
+
      this._AuthService.userDataVar.subscribe(()=>{
       if (this._AuthService.userDataVar.getValue() == null)
       {

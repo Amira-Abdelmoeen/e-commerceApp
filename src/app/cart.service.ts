@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+
+  cartItemsNum:BehaviorSubject<any> = new BehaviorSubject(null)
 
   baseUrl : string = "https://ecommerce.routemisr.com"
 
@@ -39,13 +41,14 @@ export class CartService {
   }
 
 
-  getItemsApi(pId:string):Observable<any>
+  removeItemsApi(pId:string):Observable<any>
   {
     return this._HttpClient.delete(`${this.baseUrl}/api/v1/cart/${pId}`, {
       headers: this.userHeader
     })
 
   }
+
 
   clearCartApi():Observable<any>
   {
@@ -56,3 +59,4 @@ export class CartService {
   }
 
 }
+
