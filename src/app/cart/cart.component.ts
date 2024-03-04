@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
 import { Product } from '../product'; 
 import { ToastEvokeService } from '@costlydeveloper/ngx-awesome-popup';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,8 +16,10 @@ export class CartComponent  implements OnInit {
   cartItems: any = []
   totalPrice:string=""
   cartId:string =""
+ 
+  
 
-  constructor( private toastEvokeService: ToastEvokeService,private _CartService:CartService){}
+  constructor( private toastEvokeService: ToastEvokeService,private _CartService:CartService , private _Router:Router){}
 
   //start
   ngOnInit(): void {
@@ -72,6 +75,19 @@ export class CartComponent  implements OnInit {
         this.cartItems = res.data.products
       },
       error: (err) => {console.log(err)
+      }
+    })
+  }
+
+  //clear
+  clearCart():void{
+    this._CartService.clearCartApi().subscribe({
+      next: (res) => {
+        if (res.message == "success") {
+          this.cartItems = null
+          this.totalPrice = ""
+          this._Router.navigate(['/home'])
+        }
       }
     })
   }

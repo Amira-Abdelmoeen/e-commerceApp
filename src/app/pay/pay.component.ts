@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-FormGroup
-FormControl
+import { ActivatedRoute } from '@angular/router';
+import { OrdersService } from '../orders.service';
+
 
 @Component({
   selector: 'app-pay',
@@ -11,11 +12,18 @@ FormControl
 export class PayComponent implements OnInit {
 
 
+  currentCartId:string=""
+  constructor (private _OrdersService:OrdersService , private _ActivatedRoute:ActivatedRoute){}
+
   ngOnInit(): void {
 
-    localStorage.setItem("currentPage" , "/cart")
-    
+    // localStorage.setItem("currentPage" , "/pay")
+    this._ActivatedRoute.params.subscribe( (p)=>{
+      this.currentCartId = p['id']
+  } )
   }
+
+
   addressForm : FormGroup = new FormGroup({
     details : new FormControl(null),
     phone : new FormControl(null),
@@ -24,7 +32,12 @@ export class PayComponent implements OnInit {
 
   addressFormSubmit()
   {
-    console.log(this.addressForm.value);
+    this._OrdersService.checkOut(this.currentCartId , this.addressForm.value).subscribe({
+      next: (res)=> { 
+        window.location.href=res.session.url
+       },
+      error: (err) => { console.log(err) }
+    })
     
   }
 

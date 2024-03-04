@@ -1,6 +1,10 @@
 
 
-<button [routerLink]="['/pay' , cartId]" class="btn btn-success d-block ms-auto mt-3">Check Out</button>
+
+<div class="d-flex justify-content-between mt-4">
+    <h2>Cart Shop</h2>
+    <button (click)="clearCart()" class="btn btn-sm btn-danger rounded-3 ">Clear Your Cart</button>
+</div>
 
 <h1 class="text-center text-main mt-5 ">Total Price: {{totalPrice}} </h1>
 
@@ -28,5 +32,7 @@
             <span class="fs-5 mx-2">{{item.count}}</span>
             <i (click)="updateItemsQuBtn('minus' , item.count, item.product._id)" class="fa-solid fa-circle-minus text-main fs-5 cursor-pointer"></i>
         </div>
+
     </div>
+    <button [routerLink]="['/pay' , cartId]" class="btn btn-success d-block ms-auto mt-3">Check Out</button>
 </div>
